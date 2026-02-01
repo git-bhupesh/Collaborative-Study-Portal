@@ -1,0 +1,89 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fluid py-5 px-lg-5">
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card modern-card shadow-lg border-0">
+                <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0 font-weight-bold"><i class="fas fa-list-ul mr-2"></i> Task Manager</h4>
+                    {% if not todos_done %}
+                    <span class="badge badge-light badge-pill px-3 py-2 text-primary">{{ todos|length }} Active</span>
+                    {% endif %}
+                </div>
+                
+                <div class="table-responsive">
+                    {% if not todos_done %}
+                    <table class="table table-hover mb-0">
+                        <thead class="thead-light-custom">
+                            <tr>
+                                <th class="pl-4">#</th>
+                                <th>Task Details</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-right pr-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for todo in todos %}
+                            <tr class="{% if todo.is_finished %}todo-finished{% endif %}">
+                                <td class="pl-4 text-muted">{{ forloop.counter }}</td>
+                                <td>
+                                    <div class="font-weight-bold {% if todo.is_finished %}text-strikethrough{% endif %}">
+                                        {{ todo.title }}
+                                    </div>
+                                    <small class="text-muted">{{ todo.desc|truncatechars:60 }}</small>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{% url 'update_todo' todo.id %}" class="todo-check-wrapper">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="todo-{{ todo.id }}" {% if todo.is_finished %}checked{% endif %}>
+                                            <label class="custom-control-label pointer" for="todo-{{ todo.id }}">
+                                                <small class="text-muted d-none d-md-inline">Done</small>
+                                            </label>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="text-right pr-4">
+                                    <a href="{% url 'delete_todo' todo.id %}" class="btn-delete-icon">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1632/1632670.png" width="100" class="mb-3 opacity-50" alt="Completed">
+                        <h4 class="text-muted">You're all caught up!</h4>
+                        <p class="small text-secondary">No pending tasks found.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card modern-form-card shadow-lg p-4 border-0">
+                <div class="text-center mb-4">
+                    <h3 class="font-weight-bold text-primary">New Task</h3>
+                    <div class="mini-divider mx-auto"></div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-modern-inputs">
+                        {{ form|crispy }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block py-3 mt-3 shadow-sm font-weight-bold">
+                        <i class="fas fa-plus-circle mr-2"></i> Create Todo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

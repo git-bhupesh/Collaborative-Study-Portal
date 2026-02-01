@@ -1,0 +1,93 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="font-weight-bold text-primary mb-2">
+            <i class="fas fa-book-reader mr-2"></i>Library Search
+        </h2>
+        <p class="text-muted small">Access millions of titles from our digital archives</p>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8 col-lg-6">
+                <div class="card auth-card shadow-lg p-4 border-0 overflow-hidden">
+                    <div class="accent-bar"></div>
+                    <form action="" method="post" class="modern-form">
+                        {% csrf_token %}
+                        <div class="form-group-wrapper text-left mb-0">
+                            {{form|crispy}}
+                        </div>
+                        <button class="btn btn-primary btn-block py-3 font-weight-bold rounded-pill shadow-sm" type="submit">
+                            <i class="fas fa-search mr-2"></i> Find Books
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            {% for res in results %}
+            <a href="{{res.preview}}" target="_blank" class="text-decoration-none">
+                <div class="card book-result-card mb-4 border-0 shadow-sm overflow-hidden">
+                    <div class="row no-gutters">
+                        <div class="col-md-3 bg-light-soft d-flex align-items-center justify-content-center p-4">
+                            {% if res.thumbnail %}
+                                <img src="{{res.thumbnail}}" alt="{{res.title}}" class="book-cover-img shadow">
+                            {% else %}
+                                <div class="text-muted"><i class="fas fa-book fa-3x"></i></div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-9 bg-white">
+                            <div class="card-body h-100 d-flex flex-column p-4">
+                                <div class="mb-2">
+                                    <h4 class="font-weight-bold text-dark mb-1">{{res.title}}</h4>
+                                    {% if res.subtitle and res.subtitle != "None" %}
+                                        <h6 class="text-primary font-italic small">{{res.subtitle}}</h6>
+                                    {% endif %}
+                                </div>
+                                
+                                <p class="card-text text-muted small flex-grow-1">
+                                    {{res.desc|default:"No description available for this title."|truncatechars:250}}
+                                </p>
+
+                                <div class="d-flex flex-wrap align-items-center mt-3 pt-3 border-top">
+                                    {% if res.categories %}
+                                    <div class="mr-auto">
+                                        {% for cat in res.categories %}
+                                            <span class="badge badge-soft-primary px-3 py-2 mr-1">{{cat}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <div class="text-muted small">
+                                        {% if res.count %}
+                                            <span class="mr-3"><i class="fas fa-file-alt mr-1"></i>{{res.count}} Pages</span>
+                                        {% endif %}
+                                        {% if res.rating %}
+                                            <span class="text-warning"><i class="fas fa-star mr-1"></i>{{res.rating}}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+                {% if request.method == "POST" %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-search fa-3x text-light mb-3"></i>
+                        <p class="text-muted">No books found for that query. Try something else!</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

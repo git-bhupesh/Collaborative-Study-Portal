@@ -1,0 +1,126 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-4 font-weight-bold">
+            <span id="greeting">Welcome</span>, {{ user.username|capfirst }}!
+        </h2>
+        <p class="text-muted" id="current-date">Explore your student dashboard tools</p>
+        <div class="modern-divider"></div>
+    </div>
+
+    <div class="dashboard-grid">
+        <a href="{% url 'notes' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209265.png" alt="Notes">
+                </div>
+                <div class="card-body"><h5 class="card-title">Notes</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'homework' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2997/2997313.png" alt="Homework">
+                </div>
+                <div class="card-body"><h5 class="card-title">Homework</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'youtube' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Youtube">
+                </div>
+                <div class="card-body"><h5 class="card-title">Youtube</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'todo' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4697/4697260.png" alt="To Do">
+                </div>
+                <div class="card-body"><h5 class="card-title">To Do</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'books' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3389/3389081.png" alt="Books">
+                </div>
+                <div class="card-body"><h5 class="card-title">Books</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'dictionary' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3898/3898082.png" alt="Dictionary">
+                </div>
+                <div class="card-body"><h5 class="card-title">Dictionary</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'wiki' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/48/48930.png" alt="Wikipedia">
+                </div>
+                <div class="card-body"><h5 class="card-title">WikiPedia</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'conversion' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="AI Tool">
+                </div>
+                <div class="card-body"><h5 class="card-title">AI Tool</h5></div>
+            </div>
+        </a>
+
+        <a href="{% url 'focus-timer' %}" class="grid-card-link">
+            <div class="card modern-card">
+                <div class="card-img-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3563/3563417.png" alt="Focus Timer">
+                </div>
+                <div class="card-body"><h5 class="card-title">Focus Timer</h5></div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<script>
+    function updateDashboardHeader() {
+        const greetingElement = document.getElementById('greeting');
+        const dateElement = document.getElementById('current-date');
+        const hour = new Date().getHours();
+        let welcomeText = "";
+
+        // Logic for time-based greeting
+        if (hour < 12) {
+            welcomeText = "Good Morning";
+        } else if (hour < 17) {
+            welcomeText = "Good Afternoon";
+        } else {
+            welcomeText = "Good Evening";
+        }
+
+        greetingElement.innerText = welcomeText;
+
+        // Formatting the date
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date().toLocaleDateString(undefined, options);
+        dateElement.innerHTML = `<i class="far fa-calendar-alt mr-2"></i> Today is ${today}`;
+    }
+
+    // Run on load
+    updateDashboardHeader();
+</script>
+
+{% endblock content %}

@@ -1,0 +1,124 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="col-md-6 col-lg-5">
+            <div class="card auth-card shadow-lg border-0 overflow-hidden">
+                <div class="accent-bar"></div>
+                
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="font-weight-bold text-primary mb-1">Sign In</h2>
+                        <p class="text-muted small">Welcome back! Access your student portal.</p>
+                    </div>
+                    
+                    <form method="POST" class="modern-form">
+                        {% csrf_token %}
+                        <div class="form-group-wrapper">
+                            {{ form|crispy }}
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                <label class="custom-control-label small text-muted" for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#resetPasswordModal" class="small font-weight-bold text-primary hover-underline">
+                                Forgot Password?
+                            </a>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block py-3 font-weight-bold shadow-sm rounded-pill" type="submit">
+                            Sign In <i class="fas fa-sign-in-alt ml-2"></i>
+                        </button>
+                    </form>
+
+                    <div class="divider-container my-4">
+                        <span>OR SIGN IN WITH</span>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'social:begin' 'facebook' %}" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{% url 'social:begin' 'github' %}" class="social-btn gh"><i class="fab fa-github"></i></a>
+                        <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="social-btn in"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <small class="text-muted">Need an account? 
+                            <a class="font-weight-bold text-primary ml-1" href="{% url 'register' %}">Create an Account</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+            <div class="accent-bar" style="height: 6px; background: #4f46e5; border-radius: 20px 20px 0 0;"></div>
+            <div class="modal-body p-5">
+                <div class="text-center mb-4">
+                    <div class="icon-circle bg-light-primary text-primary mb-3 mx-auto">
+                        <i class="fas fa-lock-open fa-2x"></i>
+                    </div>
+                    <h4 class="font-weight-bold">Forgot Password?</h4>
+                    <p class="text-muted small">Enter your email address and we'll send you a link to reset your password.</p>
+                </div>
+
+                <form action="{% url 'password_reset' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="small font-weight-bold text-dark">Email Address</label>
+                        <input type="email" name="email" class="form-control rounded-pill border-light bg-light py-4 px-3" placeholder="Enter your email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block rounded-pill py-3 mt-4 font-weight-bold shadow-sm">
+                        Send Reset Link
+                    </button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-link btn-sm text-muted font-weight-bold text-decoration-none" data-dismiss="modal">
+                        Nevermind, I remember!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-underline:hover {
+        text-decoration: underline !important;
+    }
+    
+    /* Perfect spacing for the Forgot link */
+    #div_id_password {
+        margin-bottom: 0px !important;
+    }
+
+    .icon-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bg-light-primary {
+        background-color: rgba(79, 70, 229, 0.1);
+    }
+
+    /* Modal Backdrop Blur for that premium feel */
+    .modal-backdrop.show {
+        backdrop-filter: blur(5px);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+</style>
+
+{% endblock content %}

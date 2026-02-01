@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Student Dashboard</title>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+  <link
+    rel="shortcut icon"
+    href="https://previews.123rf.com/images/unitonevector/unitonevector1904/unitonevector190402409/123347776-woman-working-with-laptop-flat-color-illustration-young-programmer-student-cartoon-character-remote-.jpg"
+  />
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<!-- ===================== NAVBAR ===================== -->
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">Microsoft Engage</a>
+
+      <div class="d-flex align-items-center">
+        <button id="themeToggle" class="theme-toggle mr-2" aria-label="Toggle theme">🌙</button>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+               href="{% url 'home' %}">
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+              Options
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="{% url 'books' %}">
+                <i class="fas fa-book"></i> Books
+              </a>
+              <a class="dropdown-item" href="{% url 'wiki' %}">
+                <i class="fab fa-wikipedia-w"></i> Wikipedia
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'dictionary' %}">
+                <i class="fas fa-spell-check"></i> Dictionary
+              </a>
+              <a class="dropdown-item" href="{% url 'youtube' %}">
+                <i class="fab fa-youtube"></i> Youtube
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'todo' %}">
+                <i class="fas fa-list-ul"></i> To-do
+              </a>
+              <a class="dropdown-item" href="{% url 'homework' %}">
+                <i class="fas fa-pencil-alt"></i> Homework
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'notes' %}">
+                <i class="fas fa-sticky-note"></i> Notes
+              </a>
+              <a class="dropdown-item" href="{% url 'conversion' %}">
+                <i class="fas fa-robot"></i> AI Tools
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'focus-timer' %}">
+                <i class="fas fa-clock"></i> Focus Timer
+              </a>
+            </div>
+          </li>
+
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_logout' %}">Sign out</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signin' %}">Sign in</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<main class="flex-fill container py-4">
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  {% block content %}
+  {% endblock %}
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="main-footer mt-auto">
+  <div class="container text-center py-3">
+    <p class="mb-1 font-weight-bold">
+      © 2026 Collaborative Study Portal
+    </p>
+
+    <p class="text-muted small mb-2">
+      Designed & Developed with
+      <i class="fas fa-heart text-danger pulse"></i>
+      by <span class="developer-name">Bhupesh Dewangan</span>
+    </p>
+
+    <div>
+      <a href="https://github.com/itsGuruJi/" class="text-muted mx-2"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/bhupesh-dew" class="text-muted mx-2"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("themeToggle");
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+    html.dataset.theme = savedTheme;
+    toggle.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+
+    toggle.onclick = () => {
+      const newTheme = html.dataset.theme === "dark" ? "light" : "dark";
+      html.dataset.theme = newTheme;
+      toggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
+      localStorage.setItem("theme", newTheme);
+    };
+  });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,1432 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* ===============================
+   Design Tokens (Modern SaaS)
+================================ */
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #4f46e5;
+  --accent: #22c55e;
+  --danger: #ef4444;
+
+  --radius: 16px;
+  --radius-sm: 12px;
+
+  --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+  
+  /* Dropdown Specific */
+  --dropdown-bg: rgba(255, 255, 255, 0.85);
+  --dropdown-border: rgba(255, 255, 255, 0.4);
+}
+
+/* ===============================
+   Base Layout
+================================ */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  background: transparent;
+}
+
+/* ===============================
+   Navbar (Modern Gradient SaaS)
+================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2.5rem;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  box-shadow: 0 10px 30px rgba(79,70,229,0.35);
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #22c55e, #a5b4fc, #22c55e);
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #e0e7ff !important;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+.navbar .nav-link:hover {
+  background: rgba(255,255,255,0.18);
+  color: #ffffff !important;
+}
+
+.navbar .nav-link.active {
+  background: none;
+  color: white !important;
+  position: relative;
+}
+
+.navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: -6px;
+  height: 3px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #22c55e, #a5b4fc);
+}
+/* ===============================
+   Modern Dropdown Menu (The Upgrade)
+================================ */
+.dropdown-menu {
+  margin-top: 1rem;
+  background: var(--dropdown-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--dropdown-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 0.75rem;
+  min-width: 220px;
+  overflow: hidden;
+  animation: dropdownFade 0.25s ease-out;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+}
+
+.dropdown-item:hover {
+  background: var(--primary);
+  color: white !important;
+  transform: translateX(4px);
+}
+/* Dividers replaced with clean gaps or subtle lines */
+.dropdown-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  margin: 0.5rem 0.75rem;
+}
+/* ===============================
+   Cards & Content
+================================ */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: none;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--primary), #6366f1);
+  color: white;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-weight: 600;
+}
+/* ===============================
+   Theme Toggle & Dark Mode
+================================ */
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) rotate(8deg);
+  box-shadow: var(--shadow-lg);
+}
+
+.navbar-brand {
+    color: white;
+}
+/* Dark Mode Overrides */
+html[data-theme="dark"] {
+  --bg: #020617;
+  --card: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  /* --primary: #6366f1; */
+  --primary: #f8f8f8;
+  --dropdown-bg: rgba(15, 23, 42, 0.9);
+  --dropdown-border: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 10px 30px rgba(0,0,0,0.6);
+  --shadow-lg: 0 25px 60px rgba(0,0,0,0.7);
+}
+
+html[data-theme="dark"] .navbar {
+  background: linear-gradient(135deg, #020617, #0f172a);
+}
+
+html[data-theme="dark"] .dropdown-divider {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Keeping other styles from your original file... */
+.account-img { height: 120px !important; width: 120px !important; border-radius: 50%; border: 3px solid var(--primary); }
+footer { background: #020617; color: #e5e7eb; }
+
+/* Fix Hamburger Visibility */
+.navbar-toggler {
+    border: none !important;
+    outline: none !important;
+}
+
+/* This makes the hamburger lines white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3Base%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+/* Mobile Dropdown Styling */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: var(--card);
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .navbar .nav-link {
+        color: var(--text) !important;
+        padding: 0.8rem 1rem;
+    }
+    
+    .navbar .nav-link.active::after {
+        display: none; /* Hide underline on mobile for cleaner look */
+    }
+
+    /* Keep the toggle button visible and clean */
+    .theme-toggle {
+        margin-right: 10px;
+    }
+}
+/* Icon styling inside dropdown */
+.dropdown-item i {
+    width: 20px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+.dropdown-item:hover i {
+    color: white; /* Match text on hover */
+}
+
+
+/* Ensure the hamburger lines are white and visible */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: var(--card); /* Uses your white/dark card color */
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: 10px;
+    box-shadow: var(--shadow-lg);
+  }
+  .nav-link {
+    color: var(--text) !important; /* Ensures text is readable on mobile background */
+  }
+}
+
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 10px;
+}
+
+/* Base Modern Card */
+.modern-card {
+  border: none !important;
+  background: var(--card);
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  height: 100%; /* Important for alignment */
+  overflow: hidden;
+}
+
+/* Image Consistency Fix */
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px; /* Fixed height for all images */
+  overflow: hidden;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes all images fit perfectly */
+  transition: transform 0.5s ease;
+}
+
+/* Interactive Hover States */
+.grid-card-link:hover {
+  text-decoration: none !important;
+}
+
+.modern-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.modern-card:hover img {
+  transform: scale(1.1);
+}
+
+.modern-card .card-body {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.modern-card .card-title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+/* Divider under Welcome message */
+.modern-divider {
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 15px auto;
+  border-radius: 10px;
+}
+
+/* Ensure icons are centered and not stretched */
+.card-img-wrapper {
+    height: 160px; /* Fixed height for consistency */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.02); /* Very light background for contrast */
+    padding: 25px;
+}
+
+.card-img-wrapper img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain; /* Prevents stretching */
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for icons */
+.modern-card:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Container Spacing */
+.container-fluid {
+    /* max-width: 1400px; */
+    margin: 0 auto;
+}
+
+/* Form Card Styling */
+.modern-form-card {
+    border-radius: 20px !important;
+    border: none;
+    width: auto;
+    background: #ffffff;
+    position: sticky;
+    top: 100px; /* Keeps form visible as you scroll notes */
+}
+
+.mini-divider {
+    width: 50px;
+    height: 4px;
+    background: #007bff;
+    border-radius: 10px;
+    margin-top: -5px;
+}
+
+/* Note Item Styling */
+.note-item-card {
+    border-radius: 15px !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.note-item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.bg-light-soft {
+    background-color: #fcfcfc;
+    min-height: 140px;
+}
+
+/* Fix for Dark Mode text visibility */
+html[data-theme="dark"] .modern-form-card, 
+html[data-theme="dark"] .note-item-card {
+    background: #1a1d21 !important;
+    color: white !important;
+}
+
+html[data-theme="dark"] .bg-light-soft {
+    background-color: #24282d !important;
+}
+
+/* Crispy Form Label Tweaks */
+.form-group label {
+    font-weight: 600;
+    color: #444;
+    text-align: left !important; /* Fixing your previous center-align */
+}
+
+
+/* =========================================
+   Modern Form Section Enhancements
+========================================= */
+
+/* The Card itself */
+.modern-form-card {
+    border-radius: var(--radius) !important;
+    background: var(--card);
+    border: none;
+    padding: 2.5rem !important; /* Extra breathing room */
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Customizing the Inputs (Crispy Forms) */
+.modern-form-card input[type="text"], 
+.modern-form-card textarea {
+    width: 100%;
+    padding: 14px 18px !important;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background-color: #f8fafc !important; /* Slightly off-white for contrast */
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+}
+
+/* Focus State (Glowing blue effect) */
+.modern-form-card input:focus, 
+.modern-form-card textarea:focus {
+    background-color: #ffffff !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+    outline: none;
+}
+
+/* Modernize the Submit Button */
+.modern-form-card .btn-primary {
+    border-radius: var(--radius-sm) !important;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.modern-form-card .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3) !important;
+}
+/* HomeWork Sec */
+
+/* --- Modern Table UI --- */
+.thead-light-custom th {
+    background-color: rgba(79, 70, 229, 0.04);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 1.2rem 15px;
+}
+
+.table td {
+    vertical-align: middle !important;
+    padding: 1rem 15px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Delete Icon Styling */
+.btn-delete-icon {
+    color: var(--danger);
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.btn-delete-icon:hover {
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
+}
+
+/* Custom Checkbox (Status) */
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+
+/* Soft Badge for Dates */
+.badge-soft-info {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* ===============================
+   Modern Date Picker Styling
+================================ */
+input[type="datetime-local"],
+input[type="date"] {
+    cursor: pointer;
+    position: relative;
+    background-color: #f8fafc !important; /* Matches other inputs */
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    padding: 12px 15px !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+}
+
+/* Style the calendar icon (for Chrome/Safari/Edge) */
+::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+/* Add a custom calendar icon appearance */
+input[type="date"]::after,
+input[type="datetime-local"]::after {
+    content: "\f133"; /* FontAwesome Calendar Icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    color: var(--primary);
+    pointer-events: none;
+}
+
+/* Dark Mode adjustment for Date Input */
+html[data-theme="dark"] input[type="date"],
+html[data-theme="dark"] input[type="datetime-local"] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: var(--dropdown-border) !important;
+    color: white !important;
+}
+
+/* --- YouTube Search Modernization --- */
+.video-result-card {
+    transition: all 0.3s ease;
+    border-radius: var(--radius) !important;
+}
+
+.video-result-card:hover {
+    transform: translateX(10px); /* Subtle slide effect instead of just lifting */
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.video-duration-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Fix for crispy forms specifically in the search header */
+.modern-form-card .form-group {
+    margin-bottom: 0.5rem;
+}
+
+/* Dark mode detail text fix */
+html[data-theme="dark"] .video-result-card .border-top {
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+
+/* --- To Do Modernization --- */
+.text-strikethrough {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.todo-finished {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+.todo-check-wrapper {
+    text-decoration: none !important;
+}
+
+.todo-check-wrapper:hover .custom-control-label {
+    color: var(--primary) !important;
+}
+
+/* Reusing your modern table design */
+.thead-light-custom th {
+    background-color: rgba(79, 70, 229, 0.04);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.2rem 15px;
+}
+
+/* Delete Icon with Hover */
+.btn-delete-icon {
+    color: var(--danger);
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.btn-delete-icon:hover {
+    background: rgba(239, 68, 68, 0.1);
+    transform: rotate(10deg);
+}
+
+
+/* --- Book Search Styling --- */
+.book-result-card {
+    transition: all 0.3s ease;
+    border-radius: var(--radius) !important;
+    background: var(--card);
+}
+
+.book-result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Primary soft badge for categories */
+.badge-soft-primary {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    border-radius: 6px;
+    font-size: 0.75rem;
+}
+
+/* Ensures book cover images don't look distorted */
+.book-result-card img {
+    transition: transform 0.3s ease;
+}
+
+.book-result-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Dark mode adjustment for book card separator */
+html[data-theme="dark"] .book-result-card .border-top {
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+
+/* --- Wikipedia Result Styling --- */
+.line-height-lg {
+    line-height: 1.8;
+    color: #334155;
+    font-size: 1.1rem;
+}
+
+.wiki-content {
+    position: relative;
+    padding-left: 20px;
+    border-left: 4px solid var(--primary); /* Left accent bar like a quote */
+}
+
+/* Print Friendly Button */
+.btn-outline-secondary {
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f1f5f9;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Dark mode adjustments for article text */
+html[data-theme="dark"] .line-height-lg {
+    color: #cbd5e1;
+}
+
+html[data-theme="dark"] .wiki-content {
+    border-left-color: var(--accent);
+}
+
+/* --- Dictionary Custom Styles --- */
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    padding: 10px 10px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    line-height: 1.33;
+}
+
+.shadow-inner {
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.badge-soft-primary {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    border-radius: 20px; /* Rounded pill style for synonyms */
+    font-weight: 500;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+/* Dark mode tweaks */
+html[data-theme="dark"] .shadow-inner {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* --- AI Tools Page Enhancements --- */
+.ai-tool-card {
+    border-radius: var(--radius) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--card);
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.ai-tool-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.ai-logo-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 10px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.ai-tool-card:hover .ai-logo-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.ai-logo-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.ai-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+/* Dark mode logo background */
+html[data-theme="dark"] .ai-logo-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Floating Weird Icon Effect --- */
+.floating-icon-container {
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    animation: float 4s ease-in-out infinite; /* This makes it float */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ai-logo-weird {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Offset animations so they don't move in unison */
+.col-md-4:nth-child(2) .floating-icon-container { animation-delay: 0.5s; }
+.col-md-4:nth-child(3) .floating-icon-container { animation-delay: 1s; }
+.col-md-4:nth-child(4) .floating-icon-container { animation-delay: 1.5s; }
+
+.tool-card {
+    background: var(--card);
+    transition: all 0.3s ease;
+    border-radius: var(--radius) !important;
+}
+
+.tool-card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Dark mode adjustment */
+html[data-theme="dark"] .floating-icon-container {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* --- Profile Dashboard Styles --- */
+.bg-primary-dark {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar-wrapper {
+    width: 100px;
+    height: 100px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-initial {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.badge-light-soft {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.badge-soft-primary {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+}
+
+.text-light-gray {
+    color: #cbd5e1;
+}
+
+.hover-rotate:hover {
+    display: inline-block;
+    transform: rotate(15deg);
+    transition: transform 0.2s ease;
+}
+
+/* Striking through text for finished items */
+.text-strikethrough {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+
+/* --- Register & Auth Styling --- */
+.btn-social {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: white !important;
+    font-size: 1.1rem;
+}
+
+.btn-social:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.btn-facebook { background-color: #1877f2; }
+.btn-github   { background-color: #24292e; }
+.btn-linkedin { background-color: #0077b5; }
+
+/* Form Field Styling */
+.modern-card .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.modern-card .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Dark mode overrides */
+html[data-theme="dark"] .modern-card .form-control {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: white;
+}
+
+/* --- Authentication & Form UI --- */
+.auth-card {
+    border-radius: 20px !important;
+    background: #ffffff;
+}
+
+/* Hiding the "weird" Django help text by default */
+.form-compact .help-block, 
+.form-compact .form-text {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 4px;
+    display: none; /* Hide the long lists */
+}
+
+/* Show help text only when the specific input is focused */
+.form-group:focus-within .form-text {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Modern Input Styling */
+.modern-form .form-control {
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.modern-form .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    background-color: #fff;
+}
+
+/* Social Icon Styling */
+.social-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    text-decoration: none !important;
+    transition: transform 0.2s ease;
+    margin: 0 8px;
+}
+
+.social-circle:hover { transform: translateY(-3px); }
+.fb { background: #1877f2; }
+.gh { background: #24292e; }
+.in { background: #0077b5; }
+
+/* Divider styling */
+.divider-container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.divider-container:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #e2e8f0;
+    z-index: -1;
+}
+.divider-container span {
+    background: #fff;
+    padding: 0 15px;
+    color: #94a3b8;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+/* --- Register & Auth Styling --- */
+.btn-social {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: white !important;
+    font-size: 1.1rem;
+}
+
+.btn-social:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.btn-facebook { background-color: #1877f2; }
+.btn-github   { background-color: #24292e; }
+.btn-linkedin { background-color: #0077b5; }
+
+/* Form Field Styling */
+.modern-card .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.modern-card .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Dark mode overrides */
+html[data-theme="dark"] .modern-card .form-control {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: white;
+}
+
+/* --- Sign Out Specific Styles --- */
+.bg-light-gray {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+/* Ensure the container is centered vertically for a clean exit look */
+
+.auth-container {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+/* --- Adapting Auth Cards to Theme --- */
+.auth-card {
+    /* Use the variable instead of #ffffff */
+    background: var(--card) !important;
+    border-radius: 20px !important;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ensure the text inside also adapts */
+html[data-theme="dark"] .auth-card h2, 
+html[data-theme="dark"] .auth-card p,
+html[data-theme="dark"] .auth-card label {
+    color: #ffffff !important;
+}
+
+/* Make sure the form inputs adapt too */
+html[data-theme="dark"] .modern-auth-form .form-control {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: #334155;
+    color: white;
+}
+
+
+/* --- Premium Auth Styling --- */
+.auth-card {
+    border-radius: 24px !important; /* Matches AI tool cards */
+    background: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.accent-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #4f46e5, #10b981); /* Matches AI Hub top bar */
+}
+
+/* Fixes the "Noobie" Inputs */
+.modern-form .form-control {
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 14px 18px;
+    height: auto;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.modern-form .form-control:focus {
+    border-color: #4f46e5;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* Same Help-Text fix we used for Register */
+.form-group-wrapper .help-block, 
+.form-group-wrapper .form-text {
+    display: none !important; /* Hides annoying password rules unless there's an error */
+}
+
+.form-group-wrapper .invalid-feedback {
+    display: block !important;
+}
+
+/* Social Icon Circles */
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.1);
+}
+
+.fb { background: #1877f2; }
+.gh { background: #24292e; }
+.in { background: #0077b5; }
+
+
+/* --- High-End Input Box Styling --- */
+.modern-auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Base state of the input box */
+.modern-auth-form .form-control {
+    background-color: #f1f5f9 !important; /* Soft grey fill to remove "noobie" white look */
+    border: 2px solid transparent !important; /* Hide border until focus */
+    border-radius: 14px !important;
+    padding: 12px 16px !important;
+    height: 52px !important; /* Taller inputs feel more premium */
+    font-size: 1rem;
+    color: #1e293b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Interactive Focus State */
+.modern-auth-form .form-control:focus {
+    background-color: #ffffff !important;
+    border-color: #4f46e5 !important; /* Primary blue from your AI Hub */
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1), 
+                0 4px 6px -2px rgba(79, 70, 229, 0.05) !important;
+    outline: none;
+}
+
+/* Premium Label Styling */
+.modern-auth-form label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+    margin-left: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Dark Mode Adaptation */
+html[data-theme="dark"] .modern-auth-form .form-control {
+    background-color: #1e293b !important;
+    color: #f8fafc;
+    border-color: #334155 !important;
+}
+
+
+
+/* --- High-Power Input Overrides --- */
+
+/* This targets the actual input elements inside your wrapper */
+.form-group-wrapper input.textinput, 
+.form-group-wrapper input.passwordinput,
+.form-group-wrapper .form-control {
+    background-color: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important; /* Soft gray border */
+    border-radius: 12px !important;       /* Matches your Sign In button */
+    padding: 12px 18px !important;
+    height: 54px !important;              /* Makes them thick and pro */
+    font-size: 1rem !important;
+    color: #1e293b !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: none !important;
+}
+
+/* The Glow Effect when you click */
+.form-group-wrapper input:focus {
+    background-color: #ffffff !important;
+    border-color: #4f46e5 !important;    /* Matches your Blue Launch buttons */
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+    outline: none !important;
+}
+
+/* Professional Labels */
+.form-group-wrapper label {
+    font-weight: 700 !important;
+    color: #475569 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px !important;
+    display: block;
+}
+
+/* Hide those annoying Django help dots seen in wtf.png */
+.form-group-wrapper ul, 
+.form-group-wrapper .help-block, 
+.form-group-wrapper .form-text {
+    display: none !important;
+}
+
+/* --- Fixing Input Length and Spacing --- */
+
+.form-group-wrapper .form-group {
+    width: 100% !important; /* Forces the container to be wide */
+    margin-bottom: 1.5rem;
+}
+
+.form-group-wrapper input.textinput, 
+.form-group-wrapper input.passwordinput,
+.form-group-wrapper .form-control {
+    width: 100% !important;        /* This fixes the short length issue */
+    display: block !important;
+    background-color: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px 20px !important; /* Increased horizontal padding */
+    height: 56px !important;        /* Slightly taller for better balance */
+    box-sizing: border-box !important; /* Ensures padding doesn't break width */
+}
+
+/* Ensure the wrapper doesn't have extra side margins */
+.form-group-wrapper {
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+/* --- Focus Timer Styling --- */
+.timer-display-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 8px solid #f1f5f9;
+    border-top-color: #4f46e5; /* Animated progress look */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Reusing your high-end input styles from work.png */
+.form-group-wrapper input {
+    width: 100% !important;
+    border-radius: 12px !important;
+    background-color: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    height: 50px !important;
+    padding: 10px 15px !important;
+}
+
+.gap-3 { gap: 1rem; }
+
+
+/* Profile Avatar Logic */
+.profile-avatar-wrapper {
+    width: 110px;
+    height: 110px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; /* Allows camera badge to sit on the edge */
+}
+
+.profile-img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.avatar-edit-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #ffffff;
+    color: #4f46e5;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.avatar-edit-badge:hover {
+    transform: scale(1.15);
+    background: #f8fafc;
+}
+
+.bg-primary-dark {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.fa-circle.text-success {
+    animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.text-danger {
+    display: inline-block;
+    animation: heartBeat 1.2s infinite;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+.main-footer {
+    background-color: transparent;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.main-footer .text-muted {
+    opacity: 0.8;
+}
+
+.developer-name {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.pulse {
+    display: inline-block;
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+body.dark-mode .main-footer {
+    color: #eee;
+}
+
+

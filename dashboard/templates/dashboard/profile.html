@@ -1,0 +1,167 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container py-5 px-lg-5">
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card modern-card shadow-lg border-0 bg-primary text-white overflow-hidden">
+                <div class="row no-gutters">
+                    <div class="col-md-3 d-flex align-items-center justify-content-center p-4 bg-primary-dark">
+                        <div class="profile-avatar-wrapper shadow-lg position-relative">
+                            {% if user.profile.image %}
+                                <img src="{{ user.profile.image.url }}" class="profile-img-fluid" id="avatar-preview">
+                            {% else %}
+                                <div class="user-initial-wrapper">
+                                    <span class="user-initial">{{ user.username|slice:":1"|upper }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            <label for="profile_pic_input" class="avatar-edit-badge shadow" title="Update Photo">
+                                <i class="fas fa-camera"></i>
+                            </label>
+
+                            <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data" id="image-form" class="d-none">
+                                {% csrf_token %}
+                                <input type="file" name="image" id="profile_pic_input" accept="image/*" onchange="document.getElementById('image-form').submit();">
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-9 p-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h1 class="font-weight-bold mb-0 text-capitalize">
+                                    {% if user.get_full_name %}
+                                        {{ user.get_full_name }}
+                                    {% else %}
+                                        {{ user.username }}
+                                    {% endif %}
+                                </h1>
+                                <p class="mb-3 opacity-75">
+                                    <i class="fas fa-user-tag mr-2"></i>@{{ user.username }} 
+                                    <span class="mx-2">|</span> 
+                                    <i class="fas fa-envelope mr-2"></i>{{ user.email }}
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-light-soft px-3 py-2 mb-2 d-inline-block">
+                                    <i class="fas fa-shield-alt mr-1"></i> Student Account
+                                </span>
+                                <br>
+                                <a href="{% url 'todo' %}" class="btn btn-sm btn-light rounded-pill px-3 font-weight-bold text-primary shadow-sm">
+                                    <i class="fas fa-plus mr-1"></i> New Task
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 border-top pt-3 border-white-50">
+                            <div class="col-sm-4 mb-2 mb-sm-0">
+                                <small class="d-block opacity-75 text-uppercase font-weight-bold">Member Since</small>
+                                <strong>{{ user.date_joined|date:"F Y" }}</strong>
+                            </div>
+                            <div class="col-sm-4 mb-2 mb-sm-0">
+                                <small class="d-block opacity-75 text-uppercase font-weight-bold">Status</small>
+                                <strong><i class="fas fa-circle text-success small mr-1 pulse-dot"></i> Online</strong>
+                            </div>
+                            <div class="col-sm-4">
+                                <small class="d-block opacity-75 text-uppercase font-weight-bold">Workload</small>
+                                <strong>{{ todos|length }} Tasks Pending</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card modern-card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 font-weight-bold text-dark">
+                        <i class="fas fa-clipboard-list mr-2 text-primary"></i> Pending To-Dos
+                    </h5>
+                    <span class="badge badge-soft-primary px-3 py-1">{{ todos|length }} Total</span>
+                </div>
+                <div class="card-body p-0">
+                    {% if todos %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="thead-light small uppercase">
+                                <tr>
+                                    <th class="pl-4">Task</th>
+                                    <th class="text-right pr-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for todo in todos|slice:":5" %}
+                                <tr>
+                                    <td class="pl-4">
+                                        <span class="font-weight-500 text-dark">{{ todo.title }}</span>
+                                    </td>
+                                    <td class="text-right pr-4">
+                                        <a href="{% url 'delete_todo' todo.id %}" class="text-danger hover-rotate">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <p class="text-muted mb-0">No pending tasks!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card modern-card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 font-weight-bold text-dark">
+                        <i class="fas fa-user-graduate mr-2 text-primary"></i> Due Homework
+                    </h5>
+                    <a href="{% url 'homework' %}" class="btn btn-sm btn-link text-primary font-weight-bold">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    {% if homeworks %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="thead-light small uppercase">
+                                <tr>
+                                    <th class="pl-4">Subject</th>
+                                    <th class="text-right pr-4">Deadline</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for hw in homeworks|slice:":5" %}
+                                <tr>
+                                    <td class="pl-4">
+                                        <div class="font-weight-bold text-dark">{{ hw.subject }}</div>
+                                        <small class="text-muted">{{ hw.title|truncatechars:20 }}</small>
+                                    </td>
+                                    <td class="text-right pr-4 align-middle">
+                                        <span class="badge badge-light px-2 py-1 text-muted font-weight-normal">{{ hw.due|date:"M d" }}</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <p class="text-muted mb-0">All homework completed!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="font-weight-bold text-primary">
+            <i class="fas fa-robot mr-2"></i>AI Research Hub
+        </h2>
+        <p class="text-muted">Access the world's most powerful AI models for your research</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card modern-card tool-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <div class="floating-icon-container mb-4">
+                        <img src="{% static 'images/chatgpt-logo1.jpg' %}" alt="ChatGPT" class="ai-logo-weird">
+                    </div>
+                    <h5 class="font-weight-bold">ChatGPT</h5>
+                    <p class="small text-muted flex-grow-1">Conversational AI by OpenAI for writing and coding.</p>
+                    <a href="https://chat.openai.com/" target="_blank" class="btn btn-primary btn-block rounded-pill">
+                        Launch <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card modern-card tool-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <div class="floating-icon-container mb-4">
+                        <img src="{% static 'images/gemini-logo.png' %}" alt="Gemini" class="ai-logo-weird">
+                    </div>
+                    <h5 class="font-weight-bold">Google Gemini</h5>
+                    <p class="small text-muted flex-grow-1">Multimodal AI integrated with Google Workspace.</p>
+                    <a href="https://gemini.google.com/" target="_blank" class="btn btn-primary btn-block rounded-pill">
+                        Launch <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card modern-card tool-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <div class="floating-icon-container mb-4">
+                        <img src="{% static 'images/perplexity-logo.jpg' %}" alt="Perplexity" class="ai-logo-weird">
+                    </div>
+                    <h5 class="font-weight-bold">Perplexity</h5>
+                    <p class="small text-muted flex-grow-1">AI-powered search engine for cited information.</p>
+                    <a href="https://www.perplexity.ai/" target="_blank" class="btn btn-primary btn-block rounded-pill">
+                        Launch <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card modern-card tool-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <div class="floating-icon-container mb-4">
+                        <img src="{% static 'images/nvidia-logo.png' %}" alt="NVIDIA" class="ai-logo-weird">
+                    </div>
+                    <h5 class="font-weight-bold">NVIDIA Nemotron</h5>
+                    <p class="small text-muted flex-grow-1">High-performance Llama-based models by NVIDIA.</p>
+                    <a href="https://build.nvidia.com/nvidia/llama-3_1-nemotron-70b-instruct" target="_blank" class="btn btn-primary btn-block rounded-pill" class="ai-img-fixed">
+                        Launch <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
