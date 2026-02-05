@@ -1,4 +1,7 @@
-```
+
+---
+
+````md
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-5.0.7-darkgreen?logo=django)
 ![License](https://img.shields.io/github/license/git-bhupesh/Collaborative-Study-Portal)
@@ -53,32 +56,35 @@ It combines **academic resources, AI-powered tools, task management, and focus u
 ### 🏠 Dashboard
 | Desktop View | Mobile View |
 |-------------|-------------|
-|<img width="1917" height="910" alt="image" src="https://github.com/user-attachments/assets/a44620d7-1ea1-4d5e-bdcb-d66ca1c99f81" /> | <img width="390" height="832" alt="image" src="https://github.com/user-attachments/assets/d6de628e-04c2-4780-a44b-5da144932789" /> |
+| <img width="1917" src="https://github.com/user-attachments/assets/a44620d7-1ea1-4d5e-bdcb-d66ca1c99f81" /> | <img width="390" src="https://github.com/user-attachments/assets/d6de628e-04c2-4780-a44b-5da144932789" /> |
+
+---
 
 ### 📝 Notes Manager
 | Desktop View | Mobile View |
 |-------------|-------------|
-|<img width="1919" height="915" alt="image" src="https://github.com/user-attachments/assets/2e1cfa97-2337-4254-8bc6-8dbd2418ed65" /> | <img width="390" height="831" alt="image" src="https://github.com/user-attachments/assets/3842f961-fc40-41e0-8fb6-ce0fde8dcecf" /> |
+| <img width="1919" src="https://github.com/user-attachments/assets/2e1cfa97-2337-4254-8bc6-8dbd2418ed65" /> | <img width="390" src="https://github.com/user-attachments/assets/3842f961-fc40-41e0-8fb6-ce0fde8dcecf" /> |
+
+---
 
 ### ⏱️ Focus Timer
-| Desktop View | Mobile View |
-|-------------|-------------|
-|<img width="398" height="835" alt="image" src="https://github.com/user-attachments/assets/59391b1a-8093-4d75-aa41-e0d12e35ce85" /> | <img width="1919" height="917" alt="image" src="https://github.com/user-attachments/assets/e23cbf75-7e5f-47da-be55-a130f889c1ac" /> |
+| Mobile View | Desktop View |
+|-------------|--------------|
+| <img width="398" src="https://github.com/user-attachments/assets/59391b1a-8093-4d75-aa41-e0d12e35ce85" /> | <img width="1919" src="https://github.com/user-attachments/assets/e23cbf75-7e5f-47da-be55-a130f889c1ac" /> |
+
+---
 
 ### ✅ Homework & Todo
-| Desktop View | Mobile View |
-|-------------|-------------|
-|<img width="1919" height="916" alt="image" src="https://github.com/user-attachments/assets/e98d666a-5745-4b49-a69c-f259356861b1" /> | <img width="1919" height="916" alt="image" src="https://github.com/user-attachments/assets/0ad3f3e7-59d7-4884-bba3-64b1903e7329" /> |
+| Homework | Todo |
+|----------|------|
+| <img width="1919" src="https://github.com/user-attachments/assets/e98d666a-5745-4b49-a69c-f259356861b1" /> | <img width="1919" src="https://github.com/user-attachments/assets/0ad3f3e7-59d7-4884-bba3-64b1903e7329" /> |
+
+---
 
 ### 🔐 Authentication
-| Desktop View | Mobile View |
-|-------------|-------------|
-| <img width="1919" height="914" alt="image" src="https://github.com/user-attachments/assets/8f584c22-ecf9-47c3-bea8-ec1b6b873000" /> | <img width="393" height="832" alt="image" src="https://github.com/user-attachments/assets/34e426bc-140a-401f-a4ff-a9aad3c9a865" /> |
-
-Register
-| Desktop View | Mobile View |
-|-------------|-------------|
-|<img width="407" height="843" alt="image" src="https://github.com/user-attachments/assets/1a743942-bb73-426c-b42a-da11384ca246" /> |<img width="407" height="843" alt="image" src="https://github.com/user-attachments/assets/e3498cb4-465c-476f-b07c-8bf849532487" /> |
+| Login | Register |
+|------|----------|
+| <img width="1919" src="https://github.com/user-attachments/assets/8f584c22-ecf9-47c3-bea8-ec1b6b873000" /> | <img width="407" src="https://github.com/user-attachments/assets/1a743942-bb73-426c-b42a-da11384ca246" /> |
 
 ---
 
@@ -113,8 +119,6 @@ Register
 git clone https://github.com/git-bhupesh/Collaborative-Study-Portal.git
 cd Collaborative-Study-Portal
 ````
-
----
 
 ### 2️⃣ Create & Activate Virtual Environment
 
@@ -160,36 +164,7 @@ python manage.py runserver
 ```
 
 Open in browser:
-👉 **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
-
----
-
-## 🔑 Environment Variables (Optional)
-
-Create a `.env` file in the project root:
-
-```env
-SECRET_KEY=your_django_secret_key
-DEBUG=True
-```
-
-⚠️ Do not commit `.env` files to GitHub.
-
----
-
-## 📂 Project Structure
-
-```
-Collaborative-Study-Portal/
-│── studyengage/
-│── apps/
-│── templates/
-│── static/
-│── screenshots/
-│── db.sqlite3
-│── manage.py
-│── requirements.txt
-```
+👉 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ---
 
@@ -197,21 +172,10 @@ Collaborative-Study-Portal/
 
 Contributions are welcome!
 
-### Steps:
-
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes
 4. Open a Pull Request
-
----
-
-## 🐞 Issues & Feedback
-
-Found a bug or want a feature?
-
-* Open an issue on GitHub
-* Provide clear reproduction steps
 
 ---
 
@@ -239,4 +203,3 @@ If you like this project:
 ---
 
 ```
-
