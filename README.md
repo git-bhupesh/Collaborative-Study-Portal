@@ -119,6 +119,7 @@ It combines **academic resources, AI-powered tools, task management, and focus u
 git clone https://github.com/git-bhupesh/Collaborative-Study-Portal.git
 cd Collaborative-Study-Portal
 ````
+---
 
 ### 2️⃣ Create & Activate Virtual Environment
 
