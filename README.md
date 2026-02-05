@@ -1,4 +1,3 @@
----
 ```
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-5.0.7-darkgreen?logo=django)
